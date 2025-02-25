@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 #region Namespaces
@@ -46,7 +46,13 @@ namespace HarfBuzzSharp
 		// extern hb_blob_t* hb_blob_create(const char* data, unsigned int length, hb_memory_mode_t mode, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern hb_blob_t hb_blob_create (/* char */ void* data, UInt32 length, MemoryMode mode, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern hb_blob_t hb_blob_create (/* char */ void* data, UInt32 length, MemoryMode mode, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1380,7 +1386,19 @@ namespace HarfBuzzSharp
 		// extern hb_face_t* hb_face_create_for_tables(hb_reference_table_func_t reference_table_func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern hb_face_t hb_face_create_for_tables (ReferenceTableProxyDelegate reference_table_func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern hb_face_t hb_face_create_for_tables (
+#if !NET6_0
+		ReferenceTableProxyDelegate
+#else
+		nint
+#endif
+ reference_table_func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1738,7 +1756,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_font_h_extents_func(hb_font_funcs_t* ffuncs, hb_font_get_font_h_extents_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_font_h_extents_func (hb_font_funcs_t ffuncs, FontGetFontExtentsProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_font_h_extents_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetFontExtentsProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1752,7 +1782,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_font_v_extents_func(hb_font_funcs_t* ffuncs, hb_font_get_font_v_extents_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_font_v_extents_func (hb_font_funcs_t ffuncs, FontGetFontExtentsProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_font_v_extents_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetFontExtentsProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1766,7 +1808,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_contour_point_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_contour_point_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_contour_point_func (hb_font_funcs_t ffuncs, FontGetGlyphContourPointProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_contour_point_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphContourPointProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1780,7 +1834,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_extents_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_extents_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_extents_func (hb_font_funcs_t ffuncs, FontGetGlyphExtentsProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_extents_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphExtentsProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1794,7 +1860,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_from_name_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_from_name_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_from_name_func (hb_font_funcs_t ffuncs, FontGetGlyphFromNameProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_from_name_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphFromNameProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1808,7 +1886,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_h_advance_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_advance_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_h_advance_func (hb_font_funcs_t ffuncs, FontGetGlyphAdvanceProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_h_advance_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphAdvanceProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1822,7 +1912,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_h_advances_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_advances_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_h_advances_func (hb_font_funcs_t ffuncs, FontGetGlyphAdvancesProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_h_advances_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphAdvancesProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1836,7 +1938,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_h_kerning_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_kerning_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_h_kerning_func (hb_font_funcs_t ffuncs, FontGetGlyphKerningProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_h_kerning_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphKerningProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1850,7 +1964,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_h_origin_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_origin_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_h_origin_func (hb_font_funcs_t ffuncs, FontGetGlyphOriginProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_h_origin_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphOriginProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1864,7 +1990,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_name_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_name_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_name_func (hb_font_funcs_t ffuncs, FontGetGlyphNameProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_name_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphNameProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1878,7 +2016,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_v_advance_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_advance_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_v_advance_func (hb_font_funcs_t ffuncs, FontGetGlyphAdvanceProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_v_advance_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphAdvanceProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1892,7 +2042,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_v_advances_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_advances_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_v_advances_func (hb_font_funcs_t ffuncs, FontGetGlyphAdvancesProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_v_advances_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphAdvancesProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1906,7 +2068,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_glyph_v_origin_func(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_origin_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_glyph_v_origin_func (hb_font_funcs_t ffuncs, FontGetGlyphOriginProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_glyph_v_origin_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetGlyphOriginProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1920,7 +2094,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_nominal_glyph_func(hb_font_funcs_t* ffuncs, hb_font_get_nominal_glyph_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_nominal_glyph_func (hb_font_funcs_t ffuncs, FontGetNominalGlyphProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_nominal_glyph_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetNominalGlyphProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1934,7 +2120,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_nominal_glyphs_func(hb_font_funcs_t* ffuncs, hb_font_get_nominal_glyphs_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_nominal_glyphs_func (hb_font_funcs_t ffuncs, FontGetNominalGlyphsProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_nominal_glyphs_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetNominalGlyphsProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1948,7 +2146,19 @@ namespace HarfBuzzSharp
 		// extern void hb_font_funcs_set_variation_glyph_func(hb_font_funcs_t* ffuncs, hb_font_get_variation_glyph_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_funcs_set_variation_glyph_func (hb_font_funcs_t ffuncs, FontGetVariationGlyphProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_funcs_set_variation_glyph_func (hb_font_funcs_t ffuncs,
+#if !NET6_0
+		FontGetVariationGlyphProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -2510,7 +2720,13 @@ namespace HarfBuzzSharp
 		// extern void hb_font_set_funcs(hb_font_t* font, hb_font_funcs_t* klass, void* font_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_font_set_funcs (hb_font_t font, hb_font_funcs_t klass, void* font_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_font_set_funcs (hb_font_t font, hb_font_funcs_t klass, void* font_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -4522,7 +4738,19 @@ namespace HarfBuzzSharp
 		// extern void hb_unicode_funcs_set_combining_class_func(hb_unicode_funcs_t* ufuncs, hb_unicode_combining_class_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_unicode_funcs_set_combining_class_func (hb_unicode_funcs_t ufuncs, UnicodeCombiningClassProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_unicode_funcs_set_combining_class_func (hb_unicode_funcs_t ufuncs,
+#if !NET6_0
+		UnicodeCombiningClassProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -4536,7 +4764,19 @@ namespace HarfBuzzSharp
 		// extern void hb_unicode_funcs_set_compose_func(hb_unicode_funcs_t* ufuncs, hb_unicode_compose_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_unicode_funcs_set_compose_func (hb_unicode_funcs_t ufuncs, UnicodeComposeProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_unicode_funcs_set_compose_func (hb_unicode_funcs_t ufuncs,
+#if !NET6_0
+		UnicodeComposeProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -4550,7 +4790,19 @@ namespace HarfBuzzSharp
 		// extern void hb_unicode_funcs_set_decompose_func(hb_unicode_funcs_t* ufuncs, hb_unicode_decompose_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_unicode_funcs_set_decompose_func (hb_unicode_funcs_t ufuncs, UnicodeDecomposeProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_unicode_funcs_set_decompose_func (hb_unicode_funcs_t ufuncs,
+#if !NET6_0
+		UnicodeDecomposeProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -4564,7 +4816,19 @@ namespace HarfBuzzSharp
 		// extern void hb_unicode_funcs_set_general_category_func(hb_unicode_funcs_t* ufuncs, hb_unicode_general_category_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_unicode_funcs_set_general_category_func (hb_unicode_funcs_t ufuncs, UnicodeGeneralCategoryProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_unicode_funcs_set_general_category_func (hb_unicode_funcs_t ufuncs,
+#if !NET6_0
+		UnicodeGeneralCategoryProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -4578,7 +4842,19 @@ namespace HarfBuzzSharp
 		// extern void hb_unicode_funcs_set_mirroring_func(hb_unicode_funcs_t* ufuncs, hb_unicode_mirroring_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_unicode_funcs_set_mirroring_func (hb_unicode_funcs_t ufuncs, UnicodeMirroringProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_unicode_funcs_set_mirroring_func (hb_unicode_funcs_t ufuncs,
+#if !NET6_0
+		UnicodeMirroringProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -4592,7 +4868,19 @@ namespace HarfBuzzSharp
 		// extern void hb_unicode_funcs_set_script_func(hb_unicode_funcs_t* ufuncs, hb_unicode_script_func_t func, void* user_data, hb_destroy_func_t destroy)
 		#if !USE_DELEGATES
 		[DllImport (HARFBUZZ, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void hb_unicode_funcs_set_script_func (hb_unicode_funcs_t ufuncs, UnicodeScriptProxyDelegate func, void* user_data, DestroyProxyDelegate destroy);
+		internal static extern void hb_unicode_funcs_set_script_func (hb_unicode_funcs_t ufuncs,
+#if !NET6_0
+		UnicodeScriptProxyDelegate
+#else
+		nint
+#endif
+ func, void* user_data,
+#if !NET6_0
+		DestroyProxyDelegate
+#else
+		nint
+#endif
+ destroy);
 		#else
 		private partial class Delegates {
 			[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
