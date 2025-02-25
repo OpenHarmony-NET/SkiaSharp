@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace SkiaSharp
@@ -13,10 +14,17 @@ namespace SkiaSharp
 		static SKDrawable ()
 		{
 			delegates = new SKManagedDrawableDelegates {
+#if !NET6_0
 				fDraw = DrawInternal,
 				fGetBounds = GetBoundsInternal,
 				fNewPictureSnapshot = NewPictureSnapshotInternal,
 				fDestroy = DestroyInternal,
+#else
+				fDraw = (nint)(delegate* unmanaged[Cdecl]<nint, void*, nint, void>)&DrawInternal,
+				fGetBounds = (nint)(delegate* unmanaged[Cdecl]<nint, void*, SKRect*, void>)&GetBoundsInternal,
+				fNewPictureSnapshot = (nint)(delegate* unmanaged[Cdecl]<nint, void*, nint>)&NewPictureSnapshotInternal,
+				fDestroy = (nint)(delegate* unmanaged[Cdecl]<nint, void*, void>)&DestroyInternal,
+#endif
 			};
 
 			SkiaApi.sk_manageddrawable_set_procs (delegates);
@@ -96,14 +104,22 @@ namespace SkiaSharp
 			return recorder.EndRecording ();
 		}
 
+#if !NET6_0
 		[MonoPInvokeCallback (typeof (SKManagedDrawableDrawProxyDelegate))]
+#else
+		[UnmanagedCallersOnly (CallConvs = new Type[] { typeof (CallConvCdecl) })]
+#endif
 		private static void DrawInternal (IntPtr d, void* context, IntPtr canvas)
 		{
 			var drawable = DelegateProxies.GetUserData<SKDrawable> ((IntPtr)context, out _);
 			drawable.OnDraw (SKCanvas.GetObject (canvas, false));
 		}
 
+#if !NET6_0
 		[MonoPInvokeCallback (typeof (SKManagedDrawableGetBoundsProxyDelegate))]
+#else
+		[UnmanagedCallersOnly (CallConvs = new Type[] { typeof (CallConvCdecl) })]
+#endif
 		private static void GetBoundsInternal (IntPtr d, void* context, SKRect* rect)
 		{
 			var drawable = DelegateProxies.GetUserData<SKDrawable> ((IntPtr)context, out _);
@@ -111,14 +127,22 @@ namespace SkiaSharp
 			*rect = bounds;
 		}
 
+#if !NET6_0
 		[MonoPInvokeCallback (typeof (SKManagedDrawableNewPictureSnapshotProxyDelegate))]
+#else
+		[UnmanagedCallersOnly (CallConvs = new Type[] { typeof (CallConvCdecl) })]
+#endif
 		private static IntPtr NewPictureSnapshotInternal (IntPtr d, void* context)
 		{
 			var drawable = DelegateProxies.GetUserData<SKDrawable> ((IntPtr)context, out _);
 			return drawable.OnSnapshot ()?.Handle ?? IntPtr.Zero;
 		}
 
+#if !NET6_0
 		[MonoPInvokeCallback (typeof (SKManagedDrawableDestroyProxyDelegate))]
+#else
+		[UnmanagedCallersOnly (CallConvs = new Type[] { typeof (CallConvCdecl) })]
+#endif
 		private static void DestroyInternal (IntPtr d, void* context)
 		{
 			var drawable = DelegateProxies.GetUserData<SKDrawable> ((IntPtr)context, out var gch);

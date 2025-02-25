@@ -320,7 +320,9 @@ namespace SkiaSharp
 	}
 #endif
 
+#if !NET6_0
 	[AttributeUsage (AttributeTargets.Method)]
+
 	internal sealed class MonoPInvokeCallbackAttribute : Attribute
 	{
 		public MonoPInvokeCallbackAttribute (Type type)
@@ -330,4 +332,5 @@ namespace SkiaSharp
 
 		public Type Type { get; private set; }
 	}
+#endif
 }

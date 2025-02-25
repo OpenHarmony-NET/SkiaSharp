@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 namespace SkiaSharp
 {
@@ -11,8 +12,13 @@ namespace SkiaSharp
 		static SKTraceMemoryDump ()
 		{
 			delegates = new SKManagedTraceMemoryDumpDelegates {
+#if !NET6_0
 				fDumpNumericValue = DumpNumericValueInternal,
 				fDumpStringValue = DumpStringValueInternal,
+#else
+				fDumpNumericValue = (nint)(delegate* unmanaged[Cdecl]<IntPtr, void*, void*, void*, void*, ulong, void>)&DumpNumericValueInternal,
+				fDumpStringValue = (nint)(delegate* unmanaged[Cdecl]<IntPtr, void*, void*, void*, void*, void>)&DumpStringValueInternal,
+#endif
 			};
 
 			SkiaApi.sk_managedtracememorydump_set_procs (delegates);
@@ -47,7 +53,11 @@ namespace SkiaSharp
 
 		// impl
 
+#if !NET6_0
 		[MonoPInvokeCallback (typeof (SKManagedTraceMemoryDumpDumpNumericValueProxyDelegate))]
+#else
+		[UnmanagedCallersOnly (CallConvs = new Type[] { typeof (CallConvCdecl) })]
+#endif
 		private static void DumpNumericValueInternal (IntPtr d, void* context, void* dumpName, void* valueName, void* units, ulong value)
 		{
 			var dump = DelegateProxies.GetUserData<SKTraceMemoryDump> ((IntPtr)context, out _);
@@ -58,7 +68,11 @@ namespace SkiaSharp
 				value);
 		}
 
+#if !NET6_0
 		[MonoPInvokeCallback (typeof (SKManagedTraceMemoryDumpDumpStringValueProxyDelegate))]
+#else
+		[UnmanagedCallersOnly (CallConvs = new Type[] { typeof (CallConvCdecl) })]
+#endif
 		private static void DumpStringValueInternal (IntPtr d, void* context, void* dumpName, void* valueName, void* value)
 		{
 			var dump = DelegateProxies.GetUserData<SKTraceMemoryDump> ((IntPtr)context, out _);
